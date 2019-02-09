@@ -1,24 +1,31 @@
 from PatrolSalesman import GraphDrawer
 from PatrolSalesman import Common
 
+drawer = GraphDrawer.GraphDrawer()
+common = Common.Common()
 
-def read_data(path: str):
-    data_list = []
-    with open(path) as f:
-        l_strip = [s.strip() for s in f.readlines()]
-        for data in l_strip:
-            data_list.append([int(data.split(',')[0]), int(data.split(',')[1])])
-    return data_list
+
+def all_hands(nodes: list):
+    route = common.perm(len(nodes))
+
+    '''
+        for a in range(len(nodes)):
+        for b in range(len(nodes)):
+            if a == b:
+                continue
+
+            common.distance(nodes[a], nodes[b])
+    
+    :param nodes: 
+    :return: 
+    '''
 
 
 def main():
-    drawer = GraphDrawer.GraphDrawer()
-    common = Common.Common()
-
-    nodes = read_data('./data0')
-
+    nodes = common.read_data('./data0')
     drawer.nodes_regist(nodes)
-    drawer.show_plt()
+    # drawer.show_plt()
+    all_hands(nodes)
 
 
 if __name__ == '__main__':
