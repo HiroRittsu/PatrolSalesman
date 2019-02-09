@@ -1,3 +1,5 @@
+import sys
+
 from PatrolSalesman import GraphDrawer
 from PatrolSalesman import Common
 
@@ -6,26 +8,25 @@ common = Common.Common()
 
 
 def all_hands(nodes: list):
-    route = common.perm(len(nodes))
+    min_distance = sys.float_info.max
+    min_route = 0
+    routes = common.perm(len(nodes))
+    for i in range(len(routes)):
+        result = common.sum_distance(routes[i], nodes)
+        # print(result)
+        if min_distance > result:
+            min_distance = result
+            min_route = i
 
-    '''
-        for a in range(len(nodes)):
-        for b in range(len(nodes)):
-            if a == b:
-                continue
-
-            common.distance(nodes[a], nodes[b])
-    
-    :param nodes: 
-    :return: 
-    '''
+    return routes[min_route]
 
 
 def main():
     nodes = common.read_data('./data0')
+    route = all_hands(nodes)
+    drawer.route_regist(route, nodes)
     drawer.nodes_regist(nodes)
-    # drawer.show_plt()
-    all_hands(nodes)
+    drawer.show_plt()
 
 
 if __name__ == '__main__':

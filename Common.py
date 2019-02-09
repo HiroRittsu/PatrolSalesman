@@ -3,6 +3,20 @@ import math
 
 class Common:
 
+    def distance(self, node1: list, node2: list):
+        X = node2[0] - node1[0]
+        Y = node2[1] - node1[1]
+        return math.sqrt(X ** 2 + Y ** 2)
+
+    def sum_distance(self, route: list, nodes: list):
+        sum = 0
+        for i in range(len(route)):
+            if i == len(route) - 1:
+                sum += self.distance(nodes[route[i] - 1], nodes[route[0] - 1])
+            else:
+                sum += self.distance(nodes[route[i] - 1], nodes[route[i + 1] - 1])
+        return sum
+
     def perm(self, size: int):
         result = []
 
@@ -29,8 +43,3 @@ class Common:
             for data in l_strip:
                 data_list.append([int(data.split(',')[0]), int(data.split(',')[1])])
         return data_list
-
-    def distance(self, node1: list, node2: list):
-        X = node2[0] - node1[0]
-        Y = node2[1] - node1[1]
-        return math.sqrt(X ** 2 + Y ** 2)
